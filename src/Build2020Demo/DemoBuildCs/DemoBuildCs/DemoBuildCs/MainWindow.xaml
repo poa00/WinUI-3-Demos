@@ -51,6 +51,7 @@
                         <Button Content="Minimize" Click="OnWindowMinimize" />
                         <Button Content="Maximize" Click="OnWindowMaximize" />
                         <Button Content="Restore" Click="OnWindowRestore"/>
+                        <Button Content="Center" Click="OnWindowCenter"/>
                     </StackPanel>
 
                     <Button Content="Send to Bottom" Click="OnSendToBottom" />

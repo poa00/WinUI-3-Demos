@@ -35,9 +35,12 @@ namespace DemoBuildCs
             // The Window object doesn't have Width and Height properties in WInUI 3 Desktop yet.
             // To set the Width and Height, you can use the Win32 API SetWindowPos.
             // Note, you should apply the DPI scale factor if you are thinking of dpi instead of pixels.
-            //SetWindowSize(m_windowHandle, 800, 600);
+            SetWindowSize(m_windowHandle, 800, 600);
 
-            CenterWindow(m_windowHandle, 800, 600);
+            CenterWindowInMonitor(m_windowHandle);
+
+            //CenterWindow(m_windowHandle, 800, 600);
+            m_window.Activate();
         }
 
         private void SetWindowSize(IntPtr hwnd, int width, int height)
@@ -49,7 +52,8 @@ namespace DemoBuildCs
 
             PInvoke.User32.SetWindowPos(hwnd, PInvoke.User32.SpecialWindowHandles.HWND_TOP,
                                         0, 0, width, height,
-                                        PInvoke.User32.SetWindowPosFlags.SWP_NOMOVE);
+                                        PInvoke.User32.SetWindowPosFlags.SWP_NOMOVE |
+                                        PInvoke.User32.SetWindowPosFlags.SWP_NOACTIVATE);
         }
 
         private void CenterWindow(IntPtr hnwd, int width, int height)
@@ -73,6 +77,56 @@ namespace DemoBuildCs
                                         PInvoke.User32.SetWindowPosFlags.SWP_SHOWWINDOW);
 
         }
+
+
+        private static void ClipOrCenterRectToMonitor(ref PInvoke.RECT prc, bool UseWorkArea, bool IsCenter)
+        {
+            IntPtr hMonitor;
+            PInvoke.RECT rc;
+            int w = prc.right - prc.left;
+            int h = prc.bottom - prc.top;
+
+            hMonitor = PInvoke.User32.MonitorFromRect(ref prc, PInvoke.User32.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+            PInvoke.User32.MONITORINFO mi = new PInvoke.User32.MONITORINFO();
+            mi.cbSize = (int)Marshal.SizeOf(mi);
+
+            PInvoke.User32.GetMonitorInfo(hMonitor, out mi);
+
+            if (UseWorkArea)
+                rc = mi.rcWork;
+            else
+                rc = mi.rcMonitor;
+
+            if (IsCenter)
+            {
+                prc.left = rc.left + (rc.right - rc.left - w) / 2;
+                prc.top = rc.top + (rc.bottom - rc.top - h) / 2;
+                prc.right = prc.left + w;
+                prc.bottom = prc.top + h;
+            }
+            else
+            {
+                prc.left = Math.Max(rc.left, Math.Min(rc.right - w, prc.left));
+                prc.top = Math.Max(rc.top, Math.Min(rc.bottom - h, prc.top));
+                prc.right = prc.left + w;
+                prc.bottom = prc.top + h;
+            }
+        }
+
+
+        public static void CenterWindowInMonitor(IntPtr hwnd)
+        {
+            PInvoke.RECT rc;
+            PInvoke.User32.GetWindowRect(hwnd, out rc);
+            ClipOrCenterRectToMonitor(ref rc, true, true);
+            PInvoke.User32.SetWindowPos(hwnd, PInvoke.User32.SpecialWindowHandles.HWND_TOP,
+                rc.left, rc.top, 0, 0,
+                PInvoke.User32.SetWindowPosFlags.SWP_NOSIZE |
+                PInvoke.User32.SetWindowPosFlags.SWP_NOZORDER |
+                PInvoke.User32.SetWindowPosFlags.SWP_NOACTIVATE);
+        }
+
 
 
         private Window m_window;

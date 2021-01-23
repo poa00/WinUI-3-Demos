@@ -188,5 +188,12 @@ namespace DemoBuildCs
             PInvoke.User32.ShowWindow(hwnd,
                 PInvoke.User32.WindowShowStyle.SW_RESTORE);
         }
+
+        private void OnWindowCenter(object sender, RoutedEventArgs e)
+        {
+            IntPtr hwnd = (App.Current as App).WindowHandle;
+
+            App.CenterWindowInMonitor(hwnd);
+        }
     }
 }
