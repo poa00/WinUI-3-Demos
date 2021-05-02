@@ -15,12 +15,6 @@ namespace DemoBuildCs
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-        }
-
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            //This is never called in WInUi 3 in Desktop Preview 3
         }
 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
@@ -35,6 +29,8 @@ namespace DemoBuildCs
             // To set the Width and Height, you can use the Win32 API SetWindowPos.
             // Note, you should apply the DPI scale factor if you are thinking of dpi instead of pixels.
             SetWindowSize(m_windowHandle, 800, 600);
+
+            m_window.Activate();
         }
 
         private void SetWindowSize(IntPtr hwnd, int width, int height)
