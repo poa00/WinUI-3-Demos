@@ -5,12 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-using Windows.System; //For Virtual Keys
-using Windows.UI.Core;
-
-using Microsoft.System;
 using Microsoft.UI;
-using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -39,7 +34,7 @@ namespace VisualSorting
         {
             InitializeCollections();
 
-            Title = "Visual Sorting Demo for WinUI 3 Preview 4"; // You still need the Title for the TaskBar title, and the Icon
+            Title = "Visual Sorting Demo for Reunion 0.5"; 
             LoadIcon("Images/windowIcon.ico");
 
             InitializeComponent();
@@ -47,17 +42,7 @@ namespace VisualSorting
             // Custom Title Bar
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(myTitleBar);
-         
-            //Bug: In Preview 4 Alt + F4 doesn't close the Window. This is a workaround.
-            Content.KeyDown += (sender, e) => {
-                //This is no longer valid:
-                //Window.Current.CoreWindow.GetKeyState(VirtualKey).HasFlag(CoreVirtualKeyStates);
-                bool altDown = KeyboardInput.GetKeyStateForCurrentThread(VirtualKey.Menu).HasFlag(CoreVirtualKeyStates.Down);
-                if (e.Key == VirtualKey.F4 && altDown)
-                {
-                    this.Close();
-                }
-            };
+           
         }
 
         private void InitializeCollections()
@@ -181,6 +166,7 @@ namespace VisualSorting
             }
         }
 
+        /*
         private void OnNewWindow(object sender, RoutedEventArgs e)
         {
             if ((bool)IsSameThread.IsChecked)
@@ -204,7 +190,7 @@ namespace VisualSorting
                 thread.Start();
 
             }
-        }
+        }*/
 
         private void LoadIcon(string iconName)
         {

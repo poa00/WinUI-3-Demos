@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SortingItemsWinUI3Demo": {
+      "commandName": "Project",
+      "commandLineArgs": "Hello"
+    }
+  }
+}

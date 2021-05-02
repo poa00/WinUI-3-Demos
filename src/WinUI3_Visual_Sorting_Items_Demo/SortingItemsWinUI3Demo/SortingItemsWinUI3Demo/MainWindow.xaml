@@ -22,15 +22,15 @@
                       ItemsSource="{x:Bind _algorithmCollection}"
                       DisplayMemberPath="Caption"
                       SelectedIndex="0"/>
-            <ProgressRing x:Name="myProgressRing" VerticalAlignment="Center" />
+            <ProgressRing x:Name="myProgressRing" IsActive="False" VerticalAlignment="Center" />
         </StackPanel>
         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2" Height="410" Width="410">
             <Canvas x:Name="canvas"/>
         </Border>
-        <StackPanel Grid.Row="3" Spacing="10" Orientation="Horizontal" Margin="0,0,0,20" HorizontalAlignment="Center">
+        <!--<StackPanel Grid.Row="3" Spacing="10" Orientation="Horizontal" Margin="0,0,0,20" HorizontalAlignment="Center">
             <Button Content="New Window" Click="OnNewWindow" />
             <CheckBox x:Name="IsSameThread" Content="Same UI Thread" IsChecked="True"/>
-        </StackPanel>
+        </StackPanel>-->
         <InfoBar x:Name="myInfoBar" 
                  Grid.Row="4"
                  IsOpen="false"
