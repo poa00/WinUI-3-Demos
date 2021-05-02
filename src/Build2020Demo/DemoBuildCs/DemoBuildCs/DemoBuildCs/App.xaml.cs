@@ -1,11 +1,8 @@
 ﻿
 using System;
 using System.Runtime.InteropServices;
-
 using WinRT;
-
 using Microsoft.UI.Xaml;
-using Windows.ApplicationModel;
 
 namespace DemoBuildCs
 {
