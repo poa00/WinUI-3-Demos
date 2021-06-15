@@ -101,7 +101,7 @@ namespace VisualSorting
         //TODO: This can be improved using Win2D.
         private void VisualizeCollection(IList<int> list)
         {
-            if (list != null && list.Count > 0)
+            if (list != null && list.Count > 0 && canvas.DispatcherQueue != null)
             {
                 canvas.DispatcherQueue.TryEnqueue(() =>
                 {

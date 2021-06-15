@@ -9,7 +9,10 @@
 
     <Grid x:Name="rootPanel" ColumnDefinitions="*" RowDefinitions="100,Auto,*, Auto, Auto">
 
-        <StackPanel Height="35" Orientation="Horizontal" Spacing="15" x:Name="myTitleBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+        <StackPanel Height="35" Orientation="Horizontal" 
+                    Spacing="15" x:Name="myTitleBar" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Top" >
             <Image Source="Images/windowIcon.gif" />
             <TextBlock VerticalAlignment="Center" Text="{x:Bind Title, Mode=OneTime}" />
         </StackPanel>

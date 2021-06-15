@@ -14,18 +14,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ProjectReunion" Version="0.5.6" />
+    <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.0-rc" />
+    <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.0-rc" />
+    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.0-rc" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
    
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.2.5" />
     <PackageReference Include="PInvoke.User32" Version="0.7.104" />
   </ItemGroup>
 
-  <ItemGroup>
+ <ItemGroup>
     <None Update="Images\windowIcon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
