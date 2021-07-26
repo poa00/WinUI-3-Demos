@@ -3,26 +3,27 @@ using System.Diagnostics; //Proccess
 using System.IO; //File access
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 
 using Windows.Storage.Pickers;
-using WinRT;
 
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Windows.ApplicationModel;
 
 namespace DemoBuildCs
 {
     public sealed partial class MainWindow : Window
     {
+
+        private IntPtr m_hwnd;
+
         public MainWindow()
         {
             this.InitializeComponent();
             splitView.PaneOpened += OnPaneOpened;
+            m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
         }
 
         private void OnPaneOpened(SplitView sender, object args)
@@ -34,24 +35,13 @@ namespace DemoBuildCs
         async void OnBrowse(object sender, RoutedEventArgs e)
         {
             var folderPicker = new FolderPicker();
+            folderPicker.FileTypeFilter.Add("*");
 
             //Make folder Picker work in Win32
-            IntPtr windowHandle = (App.Current as App).WindowHandle;
-
-            var initializeWithWindow = folderPicker.As<IInitializeWithWindow>();
-            initializeWithWindow.Initialize(windowHandle);
-            folderPicker.FileTypeFilter.Add("*");
+            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, m_hwnd);
 
             var folder = await folderPicker.PickSingleFolderAsync();
             textBox.Text = folder != null ? folder.Path : string.Empty;
-        }
-
-        [ComImport]
-        [Guid("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface IInitializeWithWindow
-        {
-            void Initialize(IntPtr hwnd);
         }
 
         void OnRun(object sender, RoutedEventArgs e)
@@ -69,7 +59,6 @@ namespace DemoBuildCs
             var sw = Stopwatch.StartNew();
             ListDirectories(textBox.Text, depth);
             sw.Stop();
-
 
             richTextBlock.Blocks.Clear();
             Paragraph paragraph = new Paragraph();
@@ -143,6 +132,7 @@ namespace DemoBuildCs
                 ((sender as RadioButton).XamlRoot.Content as SplitView).RequestedTheme = GetEnum<ElementTheme>(selectedTheme);
             }
         }
+
         void OnHelp(object sender, RoutedEventArgs e)
         {
             teachingTip.IsOpen = true;
@@ -159,35 +149,27 @@ namespace DemoBuildCs
 
         void OnSendToBottom(object sender, RoutedEventArgs e)
         {
-
-            IntPtr hwnd = (App.Current as App).WindowHandle;
-            
-            PInvoke.User32.SetWindowPos(hwnd, PInvoke.User32.SpecialWindowHandles.HWND_BOTTOM, 0, 0, 0, 0,
+            PInvoke.User32.SetWindowPos(m_hwnd, PInvoke.User32.SpecialWindowHandles.HWND_BOTTOM, 0, 0, 0, 0,
                 PInvoke.User32.SetWindowPosFlags.SWP_NOMOVE |
                 PInvoke.User32.SetWindowPosFlags.SWP_NOSIZE |
                 PInvoke.User32.SetWindowPosFlags.SWP_NOACTIVATE);
         }
+
         void OnWindowMinimize(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = (App.Current as App).WindowHandle;
-  
-            PInvoke.User32.ShowWindow(hwnd,
+            PInvoke.User32.ShowWindow(m_hwnd,
                  PInvoke.User32.WindowShowStyle.SW_MINIMIZE);
-                     
-
         }
 
         void OnWindowMaximize(object sender, RoutedEventArgs e)
         {
-            IntPtr hwnd = (App.Current as App).WindowHandle;
-
-            PInvoke.User32.ShowWindow(hwnd,
-                 PInvoke.User32.WindowShowStyle.SW_MAXIMIZE);
+            PInvoke.User32.ShowWindow(m_hwnd,
+                PInvoke.User32.WindowShowStyle.SW_MAXIMIZE);
         }
+
         void OnWindowRestore(object sender, RoutedEventArgs e)
-        {
-            IntPtr hwnd = (App.Current as App).WindowHandle;
-            PInvoke.User32.ShowWindow(hwnd,
+        { 
+            PInvoke.User32.ShowWindow(m_hwnd,
                 PInvoke.User32.WindowShowStyle.SW_RESTORE);
         }
     }

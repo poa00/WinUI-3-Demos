@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Runtime.InteropServices;
-using WinRT;
+﻿using System;
 using Microsoft.UI.Xaml;
 
 namespace DemoBuildCs
@@ -17,21 +14,20 @@ namespace DemoBuildCs
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
-            //Get the Window's HWND
-            var windowNative = m_window.As<IWindowNative>();
-            m_windowHandle = windowNative.WindowHandle;
+
+            IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
             m_window.Title = "Folder Inspector (.NET 5 Desktop WinUI 3)";
-        
-            // The Window object doesn't have Width and Height properties in WInUI 3 Desktop yet.
-            // To set the Width and Height, you can use the Win32 API SetWindowPos.
-            // Note, you should apply the DPI scale factor if you are thinking of dpi instead of pixels.
-            SetWindowSize(m_windowHandle, 800, 600);
+
+            // The Window object doesn't have Width and Height properties in WInUI 3.
+            // You can use the Win32 API SetWindowPos to set the Width and Height.
+            SetWindowSize(hwnd, 800, 600);
 
             m_window.Activate();
         }
 
         private void SetWindowSize(IntPtr hwnd, int width, int height)
         {
+            // Win32 uses pixels and WinUI 3 uses effective pixels, so you should apply the DPI scale factor
             var dpi = PInvoke.User32.GetDpiForWindow(hwnd);
             float scalingFactor = (float)dpi / 96;
             width = (int)(width * scalingFactor);
@@ -43,15 +39,5 @@ namespace DemoBuildCs
         }
 
         private Window m_window;
-        private IntPtr m_windowHandle;
-        public IntPtr WindowHandle { get { return m_windowHandle; } }
-
-        [ComImport]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        [Guid("EECDBF0E-BAE9-4CB6-A68E-9598E1CB57BB")]
-        internal interface IWindowNative
-        {
-            IntPtr WindowHandle { get; }
-        }
     }
 }
