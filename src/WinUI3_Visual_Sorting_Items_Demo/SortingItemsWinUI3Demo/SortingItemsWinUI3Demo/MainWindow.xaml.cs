@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
-using WinRT;
 
 using VisualSorting.SortingAlgorithm;
-
 
 namespace VisualSorting
 {
@@ -34,7 +31,7 @@ namespace VisualSorting
         {
             InitializeCollections();
 
-            Title = "Visual Sorting Demo for Reunion 0.5"; 
+            Title = "Visual Sorting Sample"; 
             LoadIcon("Images/windowIcon.ico");
 
             InitializeComponent();
@@ -42,7 +39,6 @@ namespace VisualSorting
             // Custom Title Bar
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(myTitleBar);
-           
         }
 
         private void InitializeCollections()
@@ -165,50 +161,15 @@ namespace VisualSorting
                 _collection.Clear();
             }
         }
-
-        /*
-        private void OnNewWindow(object sender, RoutedEventArgs e)
-        {
-            if ((bool)IsSameThread.IsChecked)
-            {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Activate();
-            }
-            else
-            {
-                var thread = new Thread(() =>
-                {
-                    var syncContext = new DispatcherQueueSynchronizationContext(Microsoft.System.DispatcherQueue.GetForCurrentThread());
-                    SynchronizationContext.SetSynchronizationContext(syncContext);
-                    Application.Start((p) =>
-                    {
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Activate();
-                    });
-                });
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
-
-            }
-        }*/
-
+              
         private void LoadIcon(string iconName)
         {
-            //Get the Window's HWND
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);//this.As<IWindowNative>().WindowHandle;
-
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            
             IntPtr hIcon = PInvoke.User32.LoadImage(IntPtr.Zero, iconName,
                 PInvoke.User32.ImageType.IMAGE_ICON, 16, 16, PInvoke.User32.LoadImageFlags.LR_LOADFROMFILE);
 
             PInvoke.User32.SendMessage(hwnd, PInvoke.User32.WindowMessage.WM_SETICON, (IntPtr)0, hIcon);
         }
-
-        //[ComImport]
-        //[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        //[Guid("EECDBF0E-BAE9-4CB6-A68E-9598E1CB57BB")]
-        //internal interface IWindowNative
-        //{
-        //    IntPtr WindowHandle { get; }
-        //}
     }
 }
