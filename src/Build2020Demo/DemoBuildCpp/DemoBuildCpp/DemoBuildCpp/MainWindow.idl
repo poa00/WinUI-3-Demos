@@ -1,11 +1,10 @@
 namespace DemoBuildCpp
 {
-	[default_interface]
-	runtimeclass MainWindow : Microsoft.UI.Xaml.Window
-	{
-		MainWindow();
-
-		// Making it public to allow x:Bind in folderTextBox
-		Microsoft.UI.Xaml.Controls.TextBox folderTextBox;
-	}
+    [default_interface]
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Window
+    {
+        MainWindow();
+        // Making it public to allow x:Bind in folderTextBox
+        Microsoft.UI.Xaml.Controls.TextBox folderTextBox;
+    }
 }

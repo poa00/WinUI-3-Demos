@@ -24,13 +24,12 @@ namespace winrt::DemoBuildCpp::implementation
         void OnWindowRestore(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void OnAbout(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void OnKeyDownTextBox(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
-
-
     private:
         fire_and_forget PickFolder();
         HWND GetWindowHandle();
         void ListDirectories(std::string dir, int depth, std::string& list);
         std::string PrintProcessNameAndID(DWORD processID);
+
     };
 }
 

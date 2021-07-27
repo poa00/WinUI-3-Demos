@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.props')" />
-  <Import Project="..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.props" Condition="Exists('..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.props')" />
+  <Import Project="..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.props" Condition="Exists('..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.props')" />
+  <Import Project="..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.props" Condition="Exists('..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.props')" />
+  <Import Project="..\..\packages\Microsoft.ProjectReunion.0.8.1\build\native\Microsoft.ProjectReunion.props" Condition="Exists('..\..\packages\Microsoft.ProjectReunion.0.8.1\build\native\Microsoft.ProjectReunion.props')" />
+  <Import Project="..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{f3149d95-8761-4dd8-bbdc-94a5f220ebdb}</ProjectGuid>
+    <ProjectGuid>{00c2b6a4-01e1-48db-9dd1-6943468900b7}</ProjectGuid>
     <ProjectName>DemoBuildCpp</ProjectName>
     <RootNamespace>DemoBuildCpp</RootNamespace>
     <!--
@@ -21,7 +23,8 @@
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <UseWinUI>true</UseWinUI>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -54,6 +57,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <DesktopCompatible>true</DesktopCompatible>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -138,24 +142,23 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PropertySheet.props" />
-    <Text Include="readme.txt">
-      <DeploymentContent>false</DeploymentContent>
-    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.targets" Condition="Exists('..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.targets')" />
-    <Import Project="..\..\packages\Microsoft.VCRTForwarders.140.1.0.7\build\native\Microsoft.VCRTForwarders.140.targets" Condition="Exists('..\..\packages\Microsoft.VCRTForwarders.140.1.0.7\build\native\Microsoft.VCRTForwarders.140.targets')" />
-    <Import Project="..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.targets" Condition="Exists('..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.targets')" />
+    <Import Project="..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.targets" Condition="Exists('..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.WinUI.3.0.0-preview3.201113.0\build\native\Microsoft.WinUI.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.VCRTForwarders.140.1.0.7\build\native\Microsoft.VCRTForwarders.140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.VCRTForwarders.140.1.0.7\build\native\Microsoft.VCRTForwarders.140.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Windows.CppWinRT.2.0.201113.7\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ProjectReunion.0.8.1\build\native\Microsoft.ProjectReunion.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ProjectReunion.0.8.1\build\native\Microsoft.ProjectReunion.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ProjectReunion.Foundation.0.8.1\build\native\Microsoft.ProjectReunion.Foundation.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.ProjectReunion.WinUI.0.8.1\build\native\Microsoft.ProjectReunion.WinUI.targets'))" />
   </Target>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "App.xaml.h"
 #include "MainWindow.xaml.h"
-#include "microsoft.ui.xaml.window.h"
+#include "microsoft.ui.xaml.window.h" //For using IWindowNative
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -12,6 +12,8 @@ using namespace Microsoft::UI::Xaml::Navigation;
 using namespace DemoBuildCpp;
 using namespace DemoBuildCpp::implementation;
 
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
@@ -20,7 +22,6 @@ using namespace DemoBuildCpp::implementation;
 App::App()
 {
     InitializeComponent();
-    Suspending({ this, &App::OnSuspending });
 
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
     UnhandledException([this](IInspectable const&, UnhandledExceptionEventArgs const& e)
@@ -34,6 +35,11 @@ App::App()
 #endif
 }
 
+/// <summary>
+/// Invoked when the application is launched normally by the end user.  Other entry points
+/// will be used such as when the application is launched to open a specific file.
+/// </summary>
+/// <param name="e">Details about the launch request and process.</param>
 void App::OnLaunched(LaunchActivatedEventArgs const&)
 {
     HWND hwnd;
@@ -57,9 +63,4 @@ void winrt::DemoBuildCpp::implementation::App::setWindowSize(const HWND& hwnd, i
     scale.right = static_cast<LONG>(width * scalingFactor);
     scale.bottom = static_cast<LONG>(height * scalingFactor);
     SetWindowPos(hwnd, HWND_TOP, 0, 0, scale.right - scale.left, scale.bottom - scale.top, SWP_NOMOVE);
-}
-
-void App::OnSuspending([[maybe_unused]] IInspectable const& sender, [[maybe_unused]] Windows::ApplicationModel::SuspendingEventArgs const& e)
-{
-    // This is never called in WInUi 3 in Desktop Preview 3
 }

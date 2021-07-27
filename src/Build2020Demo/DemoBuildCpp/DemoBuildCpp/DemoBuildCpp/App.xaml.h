@@ -14,8 +14,9 @@ namespace winrt::DemoBuildCpp::implementation
         App();
 
         void OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const&);
-        void setWindowSize(const HWND& hwnd, int width, int height);
         void OnSuspending(IInspectable const&, Windows::ApplicationModel::SuspendingEventArgs const&);
+
+        void setWindowSize(const HWND& hwnd, int width, int height);
 
     private:
         winrt::Microsoft::UI::Xaml::Window window{ nullptr };
