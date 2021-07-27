@@ -34,13 +34,16 @@ namespace DemoBuildCs
 
         async void OnBrowse(object sender, RoutedEventArgs e)
         {
-            var folderPicker = new FolderPicker();
-            folderPicker.FileTypeFilter.Add("*");
+            //var folderPicker = new FolderPicker();
+            //folderPicker.FileTypeFilter.Add("*");
 
-            //Make folder Picker work in Win32
-            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, m_hwnd);
+            ////Make folder Picker work in Win32
+            //WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, m_hwnd);
 
-            var folder = await folderPicker.PickSingleFolderAsync();
+            //var folder = await folderPicker.PickSingleFolderAsync();
+
+            FolderPickerEx folderPickerEx = new FolderPickerEx();
+            var folder = folderPickerEx.PickSingleFolder();
             textBox.Text = folder != null ? folder.Path : string.Empty;
         }
 

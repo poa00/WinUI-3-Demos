@@ -7,14 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+    <Grid RowDefinitions="*, auto">
         <Frame
             x:Name="ShellFrame">
         </Frame>
-        <Button Grid.Row="1" x:Name="PaymentButton" Content="Next" Margin="20" HorizontalAlignment="Center" MinWidth="120"/>
+        <Button Grid.Row="1" x:Name="PaymentButton" 
+                Content="Next" Margin="20" HorizontalAlignment="Center" MinWidth="120"/>
     </Grid>
 </Window>

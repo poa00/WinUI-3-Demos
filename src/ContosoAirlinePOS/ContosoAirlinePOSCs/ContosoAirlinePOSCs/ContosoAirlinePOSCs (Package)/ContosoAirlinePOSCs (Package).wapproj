@@ -37,7 +37,7 @@
   <PropertyGroup>
     <ProjectGuid>2a5fcb9e-7c78-4467-b2cc-04372d668b88</ProjectGuid>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <AppxTargetsLocation Condition="'$(AppxTargetsLocation)'==''">$(MSBuildThisFileDirectory)build\</AppxTargetsLocation>
@@ -64,10 +64,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.VCLibs.Desktop, Version=14.0" />
-    <!-- Needed for ucrtbased.dll when running a debug build. -->
-    <SDKReference Include="Microsoft.VCLibs, Version=14.0" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="Microsoft.ProjectReunion" Version="[0.8.1]">
+      <IncludeAssets>build</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="[0.8.1]">
+      <IncludeAssets>build</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
-  <Import Project="$(AppxTargetsLocation)Microsoft.WinUI.AppX.targets" />
 </Project>
