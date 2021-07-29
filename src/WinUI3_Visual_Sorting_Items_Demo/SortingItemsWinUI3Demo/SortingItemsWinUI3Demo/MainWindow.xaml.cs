@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -14,6 +13,7 @@ using VisualSorting.SortingAlgorithm;
 
 namespace VisualSorting
 {
+
     public sealed partial class MainWindow : Window
     {
         public List<ISortStrategy> _algorithmCollection;
@@ -31,7 +31,8 @@ namespace VisualSorting
         {
             InitializeCollections();
 
-            Title = "Visual Sorting Sample"; 
+            //string windowTitle = AppResourceManager.GetInstance.GetString("WindowTitle"); 
+            //Title = windowTitle; //"Visual Sorting Sample"; 
             LoadIcon("Images/windowIcon.ico");
 
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace VisualSorting
             // Custom Title Bar
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(myTitleBar);
+
         }
 
         private void InitializeCollections()
@@ -121,7 +123,7 @@ namespace VisualSorting
         private async void StartSorting()
         {
             myInfoBar.IsOpen = true;
-            myInfoBar.Message = "Action in progress.";
+            myInfoBar.Message = AppResourceManager.GetInstance.GetString("InforBar.Message.ActionInProgress"); 
             myInfoBar.Severity = InfoBarSeverity.Warning;
             myProgressRing.IsActive = true;
             DateTime dtStart = DateTime.Now;
@@ -137,7 +139,7 @@ namespace VisualSorting
                     this.DispatcherQueue.TryEnqueue(() =>
                     {
                         TimeSpan time = DateTime.Now.Subtract(dtStart);
-                        myInfoBar.Message = $"Action completed. ({time.TotalSeconds.ToString("F")} seconds)";
+                        myInfoBar.Message = $"{AppResourceManager.GetInstance.GetString("InforBar.Message.ActionCompleted") } ({time.TotalSeconds.ToString("F")}s)";
                         myInfoBar.Severity = InfoBarSeverity.Success;
                         myProgressRing.IsActive = false;
                     });
@@ -146,7 +148,7 @@ namespace VisualSorting
             }
             catch (OperationCanceledException)
             {
-                myInfoBar.Message = "Action cancelled.";
+                myInfoBar.Message = AppResourceManager.GetInstance.GetString("InforBar.Message.ActionCancelled"); ;
                 myInfoBar.Severity = InfoBarSeverity.Error;
                 myProgressRing.IsActive = false;
             }

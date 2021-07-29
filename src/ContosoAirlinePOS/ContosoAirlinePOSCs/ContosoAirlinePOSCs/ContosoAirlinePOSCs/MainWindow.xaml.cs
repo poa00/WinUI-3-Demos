@@ -29,6 +29,8 @@ namespace ContosoAirlinePOSCs
     {
         public MainWindow()
         {
+
+
             this.InitializeComponent();
 
             var rootFrame = Content as Frame;
