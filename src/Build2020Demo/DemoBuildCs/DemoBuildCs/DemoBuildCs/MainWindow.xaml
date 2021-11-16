@@ -20,13 +20,13 @@
                 
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="14,24,0,24" >
                     <SymbolIcon Symbol="Setting" />
-                    <TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"
+                               Style="{StaticResource TitleTextBlockStyle}"/>
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Left"  Grid.Row="1" Spacing="10" Padding="20">
-                    <TextBlock  Style="{StaticResource TitleTextBlockStyle}"
+                    <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
                                 Margin="0,4,0,0"
-                                FontWeight="Normal"
                                 Text="Theme Mode" />
                     <StackPanel x:Name="themePanel" Margin="0,10,0,0">
                         <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light"  />
@@ -35,15 +35,14 @@
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Left"  Grid.Row="2" Spacing="10" Padding="20">
-                    <TextBlock  Style="{StaticResource TitleTextBlockStyle}"
+                    <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
                                 Margin="0,4,0,0"
-                                FontWeight="Normal"
                                 Text="Show Modules" />
                     <Button Grid.Column="4" Content="Display" Click="OnAbout" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left"  Grid.Row="3" Spacing="10" Padding="20">
 
-                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
                                Margin="0,4,0,0"
                                Text="Win32 APIs" />
 

@@ -16,7 +16,7 @@ namespace DemoBuildCs
             m_window = new MainWindow();
 
             IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
-            m_window.Title = "Folder Inspector (.NET 5 Desktop WinUI 3)";
+            m_window.Title = "Folder Inspector (.NET 6 WinUI 3)";
 
             // The Window object doesn't have Width and Height properties in WInUI 3.
             // You can use the Win32 API SetWindowPos to set the Width and Height.
