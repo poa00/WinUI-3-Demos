@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml" />
+    <Page Include="LoginPage.xaml" />
+    <Page Include="FlightReservationPage.xaml" />
+    <Page Include="BookFlightPage.xaml" />
+    <Page Include="BoardingPassWindow.xaml" />
+    <Page Include="AppThemeDictionary.xaml" />
+    <Page Include="PassengerFormControl.xaml" />
+    <Page Include="SearchPage.xaml" />
+    <Page Include="SearchResultPage.xaml" />
+    <Page Include="SettingsPage.xaml" />
+    <Page Include="ShellPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="App.idl" />
+    <Midl Include="MainWindow.idl" />
+    <Midl Include="Airport.idl" />
+    <Midl Include="LoginViewModel.idl" />
+    <Midl Include="LoginPage.idl" />
+    <Midl Include="FrequencyStats.idl" />
+    <Midl Include="FlightReservationViewModel.idl" />
+    <Midl Include="FlightReservationPage.idl" />
+    <Midl Include="Flight.idl" />
+    <Midl Include="BookingResult.idl" />
+    <Midl Include="Booking.idl" />
+    <Midl Include="BookFlightViewModel.idl" />
+    <Midl Include="BookFlightPage.idl" />
+    <Midl Include="BoardingPassWindow.idl" />
+    <Midl Include="MenuItem.idl" />
+    <Midl Include="PassengerFormControl.idl" />
+    <Midl Include="People.idl" />
+    <Midl Include="Schedule.idl" />
+    <Midl Include="SearchPage.idl" />
+    <Midl Include="SearchQuery.idl" />
+    <Midl Include="SearchResultPage.idl" />
+    <Midl Include="SearchResultViewModel.idl" />
+    <Midl Include="SearchViewModel.idl" />
+    <Midl Include="SettingsPage.idl" />
+    <Midl Include="ShellPage.idl" />
+    <Midl Include="ShellViewModel.idl" />
+    <Midl Include="User.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="Airport.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="LoginViewModel.cpp" />
+    <ClCompile Include="FrequencyStats.cpp" />
+    <ClCompile Include="FlightReservationViewModel.cpp" />
+    <ClCompile Include="Flight.cpp" />
+    <ClCompile Include="BookingResult.cpp" />
+    <ClCompile Include="Booking.cpp" />
+    <ClCompile Include="BookFlightViewModel.cpp" />
+    <ClCompile Include="MenuItem.cpp" />
+    <ClCompile Include="MockRepository.cpp" />
+    <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="People.cpp" />
+    <ClCompile Include="Schedule.cpp" />
+    <ClCompile Include="SearchQuery.cpp" />
+    <ClCompile Include="SearchResultViewModel.cpp" />
+    <ClCompile Include="SearchViewModel.cpp" />
+    <ClCompile Include="ShellViewModel.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="Services\BookingSearch\IFlightSearchService.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Airport.h" />
+    <ClInclude Include="App.h" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="LoginViewModel.h" />
+    <ClInclude Include="INavigationService.h" />
+    <ClInclude Include="FrequencyStats.h" />
+    <ClInclude Include="FlightReservationViewModel.h" />
+    <ClInclude Include="Flight.h" />
+    <ClInclude Include="BookingResult.h" />
+    <ClInclude Include="Booking.h" />
+    <ClInclude Include="BookFlightViewModel.h" />
+    <ClInclude Include="MenuItem.h" />
+    <ClInclude Include="MockRepository.h" />
+    <ClInclude Include="People.h" />
+    <ClInclude Include="Schedule.h" />
+    <ClInclude Include="SearchQuery.h" />
+    <ClInclude Include="SearchResultViewModel.h" />
+    <ClInclude Include="SearchViewModel.h" />
+    <ClInclude Include="ShellViewModel.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Services\Authentication\IAuthenticationService.h" />
+    <ClInclude Include="Services\BookingSearch\IFlightSearchService.h" />
+    <ClInclude Include="Services\Dashboard\IDashboardService.h" />
+    <ClInclude Include="Services\FlightBooking\IFlightBookingService.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Barcode.png" />
+    <Image Include="Assets\BookFlightCover.jpg" />
+    <Image Include="Assets\ContosoAirLogo.png" />
+    <Image Include="Assets\HeaderBackground.png" />
+    <Image Include="Assets\LoginBackground.png" />
+    <Image Include="Assets\QRCode.png" />
+    <Image Include="Assets\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{3836652a-54c3-44a4-859d-0858fb039904}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+</Project>

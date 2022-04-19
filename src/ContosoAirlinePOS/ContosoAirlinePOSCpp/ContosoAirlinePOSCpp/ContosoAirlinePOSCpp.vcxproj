@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.props')" />
+  <Import Project="..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props')" />
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <PropertyGroup Label="Globals">
+    <CppWinRTOptimized>true</CppWinRTOptimized>
+    <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>{3836652a-54c3-44a4-859d-0858fb039904}</ProjectGuid>
+    <ProjectName>ContosoAirlinePOSCpp</ProjectName>
+    <RootNamespace>ContosoAirlinePOSCpp</RootNamespace>
+    <!--
+      $(TargetName) should be same as $(RootNamespace) so that the produced binaries (.exe/.pri/etc.)
+      have a name that matches the .winmd
+    -->
+    <TargetName>$(RootNamespace)</TargetName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>false</AppContainerApplication>
+    <AppxPackage>true</AppxPackage>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <UseWinUI>true</UseWinUI>
+    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|arm64">
+      <Configuration>Debug</Configuration>
+      <Platform>arm64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|arm64">
+      <Configuration>Release</Configuration>
+      <Platform>arm64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <DesktopCompatible>true</DesktopCompatible>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Airport.h" />
+    <ClInclude Include="BoardingPassWindow.xaml.h">
+      <DependentUpon>BoardingPassWindow.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="BookFlightPage.xaml.h">
+      <DependentUpon>BookFlightPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="BookFlightViewModel.h" />
+    <ClInclude Include="Booking.h" />
+    <ClInclude Include="BookingResult.h" />
+    <ClInclude Include="Flight.h" />
+    <ClInclude Include="FlightReservationPage.xaml.h">
+      <DependentUpon>FlightReservationPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="FlightReservationViewModel.h" />
+    <ClInclude Include="FrequencyStats.h" />
+    <ClInclude Include="INavigationService.h" />
+    <ClInclude Include="MenuItem.h" />
+    <ClInclude Include="PassengerFormControl.xaml.h">
+      <DependentUpon>PassengerFormControl.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SearchPage.xaml.h">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="SearchResultPage.xaml.h">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="SearchResultViewModel.h" />
+    <ClInclude Include="SearchViewModel.h" />
+    <ClInclude Include="Services\Authentication\IAuthenticationService.h" />
+    <ClInclude Include="Services\BookingSearch\IFlightSearchService.h" />
+    <ClInclude Include="Services\Dashboard\IDashboardService.h" />
+    <ClInclude Include="Services\FlightBooking\IFlightBookingService.h" />
+    <ClInclude Include="LoginPage.xaml.h">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="LoginViewModel.h" />
+    <ClInclude Include="MockRepository.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="People.h" />
+    <ClInclude Include="Schedule.h" />
+    <ClInclude Include="SearchQuery.h" />
+    <ClInclude Include="ShellViewModel.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="SettingsPage.xaml.h">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="ShellPage.xaml.h">
+      <DependentUpon>ShellPage.xaml</DependentUpon>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="AppThemeDictionary.xaml">
+      <DeploymentContent>true</DeploymentContent>
+    </Page>
+    <Page Include="BoardingPassWindow.xaml" />
+    <Page Include="BookFlightPage.xaml" />
+    <Page Include="FlightReservationPage.xaml" />
+    <Page Include="LoginPage.xaml" />
+    <Page Include="MainWindow.xaml" />
+    <Page Include="PassengerFormControl.xaml" />
+    <Page Include="SearchPage.xaml" />
+    <Page Include="SearchResultPage.xaml" />
+    <Page Include="SettingsPage.xaml" />
+    <Page Include="ShellPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Airport.cpp" />
+    <ClCompile Include="BoardingPassWindow.xaml.cpp">
+      <DependentUpon>BoardingPassWindow.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="BookFlightPage.xaml.cpp">
+      <DependentUpon>BookFlightPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="BookFlightViewModel.cpp" />
+    <ClCompile Include="Booking.cpp" />
+    <ClCompile Include="BookingResult.cpp" />
+    <ClCompile Include="Flight.cpp" />
+    <ClCompile Include="FlightReservationPage.xaml.cpp">
+      <DependentUpon>FlightReservationPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="FlightReservationViewModel.cpp" />
+    <ClCompile Include="FrequencyStats.cpp" />
+    <ClCompile Include="LoginPage.xaml.cpp">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="LoginViewModel.cpp" />
+    <ClCompile Include="MenuItem.cpp" />
+    <ClCompile Include="MockRepository.cpp" />
+    <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="PassengerFormControl.xaml.cpp">
+      <DependentUpon>PassengerFormControl.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="People.cpp" />
+    <ClCompile Include="Schedule.cpp" />
+    <ClCompile Include="SearchPage.xaml.cpp">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="SearchQuery.cpp" />
+    <ClCompile Include="SearchResultPage.xaml.cpp">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="SearchResultViewModel.cpp" />
+    <ClCompile Include="SearchViewModel.cpp" />
+    <ClCompile Include="Services\BookingSearch\IFlightSearchService.cpp" />
+    <ClCompile Include="ShellViewModel.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="SettingsPage.xaml.cpp">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="ShellPage.xaml.cpp">
+      <DependentUpon>ShellPage.xaml</DependentUpon>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Airport.idl" />
+    <Midl Include="App.idl">
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="BoardingPassWindow.idl" />
+    <Midl Include="BookFlightPage.idl" />
+    <Midl Include="BookFlightViewModel.idl" />
+    <Midl Include="Booking.idl" />
+    <Midl Include="BookingResult.idl" />
+    <Midl Include="Flight.idl" />
+    <Midl Include="FlightReservationPage.idl" />
+    <Midl Include="FlightReservationViewModel.idl" />
+    <Midl Include="FrequencyStats.idl" />
+    <Midl Include="LoginPage.idl" />
+    <Midl Include="LoginViewModel.idl" />
+    <Midl Include="MainWindow.idl">
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="MenuItem.idl" />
+    <Midl Include="PassengerFormControl.idl" />
+    <Midl Include="People.idl" />
+    <Midl Include="Schedule.idl" />
+    <Midl Include="SearchPage.idl" />
+    <Midl Include="SearchQuery.idl" />
+    <Midl Include="SearchResultPage.idl" />
+    <Midl Include="SearchResultViewModel.idl" />
+    <Midl Include="SearchViewModel.idl" />
+    <Midl Include="ShellViewModel.idl" />
+    <Midl Include="User.idl" />
+    <Midl Include="SettingsPage.idl" />
+    <Midl Include="ShellPage.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt">
+      <DeploymentContent>false</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Barcode.png" />
+    <Image Include="Assets\BookFlightCover.jpg" />
+    <Image Include="Assets\ContosoAirLogo.png" />
+    <Image Include="Assets\HeaderBackground.png" />
+    <Image Include="Assets\LockScreenLogo.scale-200.png" />
+    <Image Include="Assets\LoginBackground.png" />
+    <Image Include="Assets\QRCode.png" />
+    <Image Include="Assets\Search.png" />
+    <Image Include="Assets\SplashScreen.scale-200.png" />
+    <Image Include="Assets\Square150x150Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.scale-200.png" />
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="Assets\StoreLogo.png" />
+    <Image Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <!-- Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+       Tools extension to be activated for this project even if the Windows App SDK Nuget
+       package has not yet been restored -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.targets" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.targets" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets" Condition="Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.22000.197\build\Microsoft.Windows.SDK.BuildTools.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.ImplementationLibrary.1.0.220201.1\build\native\Microsoft.Windows.ImplementationLibrary.targets'))" />
+  </Target>
+</Project>
