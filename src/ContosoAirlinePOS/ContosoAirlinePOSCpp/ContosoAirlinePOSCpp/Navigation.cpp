@@ -4,7 +4,9 @@
 
 namespace winrt::ContosoAirlinePOSCpp::implementation
 {
-	winrt::Microsoft::UI::Xaml::Controls::Frame INavigationService::m_Frame = 0;
+	// Set value to the static m_Frame member of INavigationService
+	winrt::Microsoft::UI::Xaml::Controls::Frame INavigationService::m_Frame{nullptr};
+
 	SearchQuery INavigationService::m_Query = { 0 };
 	void INavigationService::InitializeFrame(winrt::Microsoft::UI::Xaml::Controls::Frame rootFrame)
 	{
@@ -15,6 +17,7 @@ namespace winrt::ContosoAirlinePOSCpp::implementation
 	{
 		m_Frame.Navigate(pageNavigateTo);		
 	}
+
 	void INavigationService::SetSearchQuery(SearchQuery _Query)
 	{
 		if (m_Query != _Query)
@@ -27,8 +30,4 @@ namespace winrt::ContosoAirlinePOSCpp::implementation
 	{
 		_Query = m_Query;
 	}	
-	void INavigationService::RemoveFromBackStack()
-	{
-
-	}
 }

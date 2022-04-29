@@ -9,24 +9,36 @@ namespace winrt::ContosoAirlinePOSCpp::implementation
 
         ContosoAirlinePOSCpp::Airport Source();
         void Source(ContosoAirlinePOSCpp::Airport const& value);
+
         ContosoAirlinePOSCpp::Airport Destination();
         void Destination(ContosoAirlinePOSCpp::Airport const& value);
+        
         Windows::Foundation::IReference<Windows::Foundation::DateTime> TravelDate();
         void TravelDate(Windows::Foundation::IReference<Windows::Foundation::DateTime> const& value);
+        
         Windows::Foundation::IReference<Windows::Foundation::DateTime> ReturnDate();
         void ReturnDate(Windows::Foundation::IReference<Windows::Foundation::DateTime> const& value);
+        
         hstring TravelClass();
         void TravelClass(hstring const& value);
+        
+        // In C++/WinRT, all entities consumed by using the XAML x:Bind must be exposed publicly in IDL.
+        // Binding XAML markup to Bool shows Windows.Foundation.IReference<bool> in C++/WinRT.
         Windows::Foundation::IReference<bool> RoundTrip();
         void RoundTrip(Windows::Foundation::IReference<bool> const& value);
+        
         Windows::Foundation::IReference<bool> NonStop();
         void NonStop(Windows::Foundation::IReference<bool> const& value);
+        
         int32_t AdultsCount();
         void AdultsCount(int32_t value);
+        
         int32_t ChildrenCount();
         void ChildrenCount(int32_t value);
+        
         int32_t FlightId();
         void FlightId(int32_t value);
+        
         ContosoAirlinePOSCpp::Flight SelectedFlight();
         void SelectedFlight(ContosoAirlinePOSCpp::Flight const& value);
 

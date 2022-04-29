@@ -15,8 +15,6 @@ namespace winrt::ContosoAirlinePOSCpp::implementation
 
         void GetSearchQuery(SearchQuery& _Query);
 
-        void RemoveFromBackStack();       
-    
         static winrt::Microsoft::UI::Xaml::Controls::Frame m_Frame;
 
         static SearchQuery m_Query;

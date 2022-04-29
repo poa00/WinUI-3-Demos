@@ -268,11 +268,6 @@
     <Midl Include="ShellPage.idl" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="readme.txt">
-      <DeploymentContent>false</DeploymentContent>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Assets\Barcode.png" />
     <Image Include="Assets\BookFlightCover.jpg" />
     <Image Include="Assets\ContosoAirLogo.png" />
