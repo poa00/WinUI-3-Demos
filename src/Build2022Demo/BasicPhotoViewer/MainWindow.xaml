@@ -7,9 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid RowDefinitions="Auto, *, Auto">
+    <Grid RowDefinitions="Auto, Auto, *, Auto">
 
-        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+        <Grid x:Name="CustomTitleBar" Height="30" Margin="-1,0" >
+            <TextBlock VerticalAlignment="Center" 
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Margin="20,0"
+                       Text="{x:Bind Title, Mode=OneWay}"/>
+        </Grid>
+        
+        <CommandBar Background="Transparent" 
+                    IsOpen="False" 
+                    DefaultLabelPosition="Right"
+                    Grid.Row="1">
             <AppBarButton Icon="Folder" Label="Select Folder" Click="SelectFolderClick"/>
             <AppBarButton Icon="Edit" Label="Edit"/>
             <AppBarButton Icon="Flag" Label="About" Click="AboutClick"/>
@@ -18,10 +28,11 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       VerticalScrollMode="Auto"
                       HorizontalScrollMode="Disabled"
-                      Grid.Row="1">   
+                      Grid.Row="2">   
             <ScrollViewer.Resources>
                 
-                <UniformGridLayout x:Key="RepeaterLayout" ItemsJustification="SpaceAround"/>
+                <UniformGridLayout x:Key="RepeaterLayout" 
+                                   ItemsJustification="SpaceEvenly"/>
 
                 <DataTemplate x:Key="ImageInfoTemplate"
                           x:DataType="local:ImageInfo">
@@ -54,6 +65,6 @@
                  IsOpen="False"
                  VerticalAlignment="Bottom"
                  Severity="Informational"
-                 Grid.Row="2"/>
+                 Grid.Row="3"/>
     </Grid>
 </Window>
