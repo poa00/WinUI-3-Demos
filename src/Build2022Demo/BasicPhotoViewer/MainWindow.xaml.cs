@@ -23,7 +23,7 @@ namespace PhotoViewer
 
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(CustomTitleBar);
-            
+
             TrySetMicaBackdrop();
             Title = "Simple Photo Viewer";
 
@@ -76,7 +76,20 @@ namespace PhotoViewer
 
             window.Activate();
         }
+        private async void AboutClick(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "About Simple Photo Editor",
+                Content = "Done exclusively for //Build 2022",
+                CloseButtonText = "Ok"
+            };
+            //Explain XamlRoot concept. You can get the XamlRoot of any UIElement
+            dialog.XamlRoot = this.Content.XamlRoot;
+            await dialog.ShowAsync();
+        }
 
+        #region Animations
         //Advanced - Copy from XAML Controls Gallery
         private SpringVector3NaturalMotionAnimation _springAnimation;
 
@@ -103,19 +116,8 @@ namespace PhotoViewer
             }
             _springAnimation.FinalValue = new Vector3(finalValue);
         }
+        #endregion Animations
 
-        private async void AboutClick(object sender, RoutedEventArgs e)
-        {
-            ContentDialog dialog = new ContentDialog()
-            {
-                Title = "About Simple Photo Editor",
-                Content = "Done exclusively for //Build 2022",
-                CloseButtonText = "Ok"
-            };
-            //Explain XamlRoot concept. You can get the XamlRoot of any UIElement
-            dialog.XamlRoot = this.Content.XamlRoot;
-            await dialog.ShowAsync();
-        }
         #region Mica
         WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
         Microsoft.UI.Composition.SystemBackdrops.MicaController m_micaController;

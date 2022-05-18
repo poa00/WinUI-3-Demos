@@ -5,23 +5,21 @@ namespace PhotoViewer
 {
     public class ImageInfo
     {
-        public string Path { get; set; }
-        public string Name { get; set; }
+        public string Path { get; }
+        public string Name { get; }
 
-        public string FullName
-        {
-            get { return System.IO.Path.Combine(Path, Name);}
-        }
-        public ImageInfo(string path, string name)
+        public string FullName { get; }
+        public ImageInfo(string path, string name, string fullName)
         {
             Path = path;
             Name = name;
+            FullName = fullName;
         }
     }
     public class ImagesRepository
     {
         public ObservableCollection<ImageInfo> Images { get; } = new ObservableCollection<ImageInfo>();
-        
+
         public void GetImages(string folder)
         {
             Images.Clear();
@@ -30,8 +28,8 @@ namespace PhotoViewer
 
             foreach (FileInfo file in files)
             {
-                Images.Add(new ImageInfo(file.DirectoryName, file.Name));
+                Images.Add(new ImageInfo(file.DirectoryName, file.Name, file.FullName));
             }
         }
-    }    
+    }
 }

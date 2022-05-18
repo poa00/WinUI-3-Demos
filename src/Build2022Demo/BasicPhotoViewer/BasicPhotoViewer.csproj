@@ -10,6 +10,7 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+	<WindowsPackageType>MSIX</WindowsPackageType> <!-- None,MSIX, Sparse -->
   </PropertyGroup>
 
   <ItemGroup>

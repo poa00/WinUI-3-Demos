@@ -7,7 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid RowDefinitions="Auto, Auto, *, Auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
         <Grid x:Name="CustomTitleBar" Height="30" Margin="-1,0" >
             <TextBlock VerticalAlignment="Center" 
@@ -35,7 +41,7 @@
                                    ItemsJustification="SpaceEvenly"/>
 
                 <DataTemplate x:Key="ImageInfoTemplate"
-                          x:DataType="local:ImageInfo">
+                              x:DataType="local:ImageInfo">
                     <Button Click="ImageClick"
                             DataContext="{x:Bind}"
                             BorderThickness="0"

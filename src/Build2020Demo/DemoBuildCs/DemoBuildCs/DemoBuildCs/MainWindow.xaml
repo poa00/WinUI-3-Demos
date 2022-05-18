@@ -7,100 +7,109 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Grid RowDefinitions="Auto,*">
+        <Grid x:Name="CustomTitleBar" Height="30" Margin="-1,0" Grid.Row="0" >
+            <TextBlock VerticalAlignment="Center" 
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Margin="20,0"
+                       Text="{x:Bind Title, Mode=OneWay}"/>
+        </Grid>
 
-    <SplitView x:Name="splitView" 
+        <SplitView x:Name="splitView" 
                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                IsPaneOpen="False" 
                PanePlacement="Right"
                OpenPaneLength="384" 
                CompactPaneLength="96" 
+               Grid.Row="1"
                DisplayMode="Overlay">
-        <SplitView.Pane>
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
-                
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="14,24,0,24" >
-                    <SymbolIcon Symbol="Setting" />
-                    <TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"
-                               Style="{StaticResource TitleTextBlockStyle}"/>
-                </StackPanel>
+            <SplitView.Pane>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
 
-                <StackPanel HorizontalAlignment="Left"  Grid.Row="1" Spacing="10" Padding="20">
-                    <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="14,24,0,24" >
+                        <SymbolIcon Symbol="Setting" />
+                        <TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"
+                               Style="{StaticResource TitleTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Left"  Grid.Row="1" Spacing="10" Padding="20">
+                        <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
                                 Margin="0,4,0,0"
                                 Text="Theme Mode" />
-                    <StackPanel x:Name="themePanel" Margin="0,10,0,0">
-                        <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light"  />
-                        <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
+                        <StackPanel x:Name="themePanel" Margin="0,10,0,0">
+                            <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light"  />
+                            <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
 
-                <StackPanel HorizontalAlignment="Left"  Grid.Row="2" Spacing="10" Padding="20">
-                    <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
+                    <StackPanel HorizontalAlignment="Left"  Grid.Row="2" Spacing="10" Padding="20">
+                        <TextBlock  Style="{StaticResource SubtitleTextBlockStyle}"
                                 Margin="0,4,0,0"
                                 Text="Show Modules" />
-                    <Button Grid.Column="4" Content="Display" Click="OnAbout" />
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Left"  Grid.Row="3" Spacing="10" Padding="20">
+                        <Button Grid.Column="4" Content="Display" Click="OnAbout" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left"  Grid.Row="3" Spacing="10" Padding="20">
 
-                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
                                Margin="0,4,0,0"
                                Text="Win32 APIs" />
 
-                    <StackPanel Orientation="Horizontal"  Grid.Row="3" Spacing="10" >
-                        <Button Content="Minimize" Click="OnWindowMinimize" />
-                        <Button Content="Maximize" Click="OnWindowMaximize" />
-                        <Button Content="Restore" Click="OnWindowRestore"/>
+                        <StackPanel Orientation="Horizontal"  Grid.Row="3" Spacing="10" >
+                            <Button Content="Minimize" Click="OnWindowMinimize" />
+                            <Button Content="Maximize" Click="OnWindowMaximize" />
+                            <Button Content="Restore" Click="OnWindowRestore"/>
+                        </StackPanel>
+
+                        <Button Content="Send to Bottom" Click="OnSendToBottom" />
+
                     </StackPanel>
+                </Grid>
+            </SplitView.Pane>
 
-                    <Button Content="Send to Bottom" Click="OnSendToBottom" />
+            <Grid x:Name="gridRoot" RowDefinitions="Auto, Auto, *, Auto" >
 
-                </StackPanel>
-            </Grid>
-        </SplitView.Pane>
+                <Grid Height="10" />
 
-        <Grid x:Name="gridRoot" RowDefinitions="Auto, Auto, *, Auto" >
-        
-            <Grid Height="10" />
+                <Grid Grid.Row="1" ColumnSpacing="10" Padding="10" ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
 
-            <Grid Grid.Row="1" ColumnSpacing="10" Padding="10" ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
-   
-                <TextBox x:Name="textBox" Grid.Column="0" PlaceholderText="Folder to inspect" KeyDown="OnKeyDownTextBox" />
+                    <TextBox x:Name="textBox" Grid.Column="0" PlaceholderText="Folder to inspect" KeyDown="OnKeyDownTextBox" />
 
-                <Button Grid.Column="1" Content="Browse" Click="OnBrowse" />
+                    <Button Grid.Column="1" Content="Browse" Click="OnBrowse" />
 
-                <NumberBox Grid.Column="2" Minimum="0"  x:Name="numberBox" Value="0" SpinButtonPlacementMode="Compact"  
+                    <NumberBox Grid.Column="2" Minimum="0"  x:Name="numberBox" Value="0" SpinButtonPlacementMode="Compact"  
                            SmallChange="1" ToolTipService.ToolTip="Directory's depth for listing" />
-                <Button Grid.Column="3" x:Name="runBtn"  Content="Run" Click="OnRun" />
-                <Button Grid.Column="4" Content="?" Click="OnHelp" />
-                <Button Grid.Column="5" Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Height="32"  Click="OnSettings" />
-            </Grid>
+                    <Button Grid.Column="3" x:Name="runBtn"  Content="Run" Click="OnRun" />
+                    <Button Grid.Column="4" Content="?" Click="OnHelp" />
+                    <Button Grid.Column="5" Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Height="32"  Click="OnSettings" />
+                </Grid>
 
-            <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="{ThemeResource MyBrush}">
-                <ScrollViewer Grid.Row="1">
-                    <RichTextBlock x:Name="richTextBlock" TextWrapping="Wrap" Padding="10,0,10,0" />
-                </ScrollViewer>
-            </Border>
+                <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="{ThemeResource MyBrush}">
+                    <ScrollViewer Grid.Row="1">
+                        <RichTextBlock x:Name="richTextBlock" TextWrapping="Wrap" Padding="10,0,10,0" />
+                    </ScrollViewer>
+                </Border>
 
-            <TextBlock Grid.Row="3" x:Name="statusTextBlock" HorizontalTextAlignment="Right" Text="Status: No evaluated" Padding="5" />
+                <TextBlock Grid.Row="3" x:Name="statusTextBlock" HorizontalTextAlignment="Right" Text="Status: No evaluated" Padding="5" />
 
-            <ContentDialog x:Name="contentDialog"
+                <ContentDialog x:Name="contentDialog"
                            Title="Loaded modules"
-                CloseButtonText="OK">
-                <ScrollViewer MaxHeight="500">
-                    <TextBlock   x:Name="cdTextBlock" TextWrapping="Wrap" />
-                </ScrollViewer>
-            </ContentDialog>
+                           CloseButtonText="OK">
+                    <ScrollViewer MaxHeight="500">
+                        <TextBlock   x:Name="cdTextBlock" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </ContentDialog>
 
-            <TeachingTip x:Name="teachingTip"
+                <TeachingTip x:Name="teachingTip"
                          IsLightDismissEnabled="True"
                          Target="{x:Bind textBox}"
 	                     Title="Folder to list"                                        
 	                     Subtitle="Input the folder path or select the folder using the Browser button, and then press Run." >
-                <TeachingTip.IconSource>
-                    <SymbolIconSource Symbol="Clock" />
-                </TeachingTip.IconSource>
-            </TeachingTip>
+                    <TeachingTip.IconSource>
+                        <SymbolIconSource Symbol="Clock" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
 
-        </Grid>
-    </SplitView>
+            </Grid>
+        </SplitView>
+    </Grid>
 </Window>
