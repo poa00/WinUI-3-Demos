@@ -1,24 +1,22 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace PhotoViewer
 {
     public class ImageInfo
     {
-        public string Path { get; }
         public string Name { get; }
-
         public string FullName { get; }
-        public ImageInfo(string path, string name, string fullName)
+        public ImageInfo(string name, string fullName)
         {
-            Path = path;
             Name = name;
             FullName = fullName;
         }
     }
     public class ImagesRepository
     {
-        public ObservableCollection<ImageInfo> Images { get; } = new ObservableCollection<ImageInfo>();
+        public ObservableCollection<ImageInfo> Images { get; } = new();
 
         public void GetImages(string folder)
         {
@@ -28,7 +26,7 @@ namespace PhotoViewer
 
             foreach (FileInfo file in files)
             {
-                Images.Add(new ImageInfo(file.DirectoryName, file.Name, file.FullName));
+                Images.Add(new ImageInfo(file.Name, file.FullName));
             }
         }
     }

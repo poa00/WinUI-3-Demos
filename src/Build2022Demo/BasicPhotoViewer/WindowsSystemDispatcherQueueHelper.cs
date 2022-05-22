@@ -2,7 +2,6 @@
 
 namespace PhotoViewer
 {
-
     public class WindowsSystemDispatcherQueueHelper
     {
         [StructLayout(LayoutKind.Sequential)]

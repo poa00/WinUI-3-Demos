@@ -3,18 +3,19 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
+
 using System;
 using System.Numerics;
+
 using Windows.Storage.Pickers;
 
 //Mica
-using WinRT; // required to support Window.As<ICompositionSupportsSystemBackdrop>()
+using WinRT; 
 
 namespace PhotoViewer
 {
     public sealed partial class MainWindow : Window
     {
-        private string _folder;
         public ImagesRepository ImagesRepository { get; } = new ImagesRepository();
 
         public MainWindow()
@@ -25,11 +26,11 @@ namespace PhotoViewer
             this.SetTitleBar(CustomTitleBar);
 
             TrySetMicaBackdrop();
-            Title = "Simple Photo Viewer";
+            this.Title = "Simple Photo Viewer";
 
-            string _folder = "C:\\Users\\migue\\source\\repos\\WinUI-3-Demos\\src\\Build2022Demo\\Photos";
-
-            LoadImages(_folder);
+            string folderPath = "C:\\Users\\migue\\source\\repos\\WinUI-3-Demos\\src\\Build2022Demo\\Photos";
+            
+            LoadImages(folderPath);
         }
         private async void SelectFolderClick(object sender, RoutedEventArgs e)
         {
@@ -40,73 +41,71 @@ namespace PhotoViewer
             WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
 
             var folder = await folderPicker.PickSingleFolderAsync();
+
             if (folder is not null)
             {
-                _folder = folder.Path;
-                LoadImages(_folder);
+                LoadImages(folder.Path);
             }
         }
-        void LoadImages(string _folder)
+        void LoadImages(string folder)
         {
-            ImagesRepository.GetImages(_folder);
+            ImagesRepository.GetImages(folder);
             ImageCollectionInfoBar.IsOpen = true;
-            ImageCollectionInfoBar.Title = "Load Images";
-            ImageCollectionInfoBar.Message = ImagesRepository.Images.Count.ToString() + " images loaded";
+            ImageCollectionInfoBar.Title = "Images Info";
+            ImageCollectionInfoBar.Message = $"{ImagesRepository.Images.Count} images loaded.";
         }
 
         private void ImageClick(object sender, RoutedEventArgs e)
         {
-            //MultiWindows, Also you can write C# code, you don't need markup
-
-            var window = new Window();
-            ImageInfo imageInfo = (sender as Button).DataContext as ImageInfo;
+            Window window = new();
+            var imageInfo = (sender as Button)?.DataContext as ImageInfo;
             if (imageInfo is not null)
             {
-                Image img = new Image();
+                Image img = new();
                 img.Source = new BitmapImage(new Uri(imageInfo.FullName, UriKind.Absolute));
                 window.Content = img;
                 window.Title = imageInfo.Name;
             }
 
-            //Another componente of the WinAppSDK: AppWindow Interop 
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
             var winID = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
             var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(winID);
+
             appWindow.Resize(new Windows.Graphics.SizeInt32(800, 600));
 
             window.Activate();
         }
         private async void AboutClick(object sender, RoutedEventArgs e)
         {
-            ContentDialog dialog = new ContentDialog()
+            ContentDialog dialog = new()
             {
-                Title = "About Simple Photo Editor",
-                Content = "Done exclusively for //Build 2022",
-                CloseButtonText = "Ok"
+                Title = "About Simple Photo Viewer",
+                Content = "Thank you //Build 2022",
+                CloseButtonText = "Ok",
+                XamlRoot = (sender as Button)?.XamlRoot
             };
-            //Explain XamlRoot concept. You can get the XamlRoot of any UIElement
-            dialog.XamlRoot = this.Content.XamlRoot;
             await dialog.ShowAsync();
         }
-
         #region Animations
-        //Advanced - Copy from XAML Controls Gallery
+        //Copied from the WinUI 3 Gallery
         private SpringVector3NaturalMotionAnimation _springAnimation;
 
         private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e)
         {
             CreateOrUpdateSpringAnimation(1.05f);
-            (sender as UIElement).StartAnimation(_springAnimation);
+            (sender as UIElement)?.StartAnimation(_springAnimation);
         }
         private void OnElementPointerExited(object sender, PointerRoutedEventArgs e)
         {
             CreateOrUpdateSpringAnimation(1.0f);
-            (sender as UIElement).StartAnimation(_springAnimation);
+            (sender as UIElement)?.StartAnimation(_springAnimation);
         }
         private void CreateOrUpdateSpringAnimation(float finalValue)
         {
-            if (_springAnimation == null)
+            if (_springAnimation is null)
             {
+                // In WinUI3, the Compositor is exposed by the Window object.
+                // Make sure "this" references to the Window
                 Compositor compositor = this.Compositor;
                 if (compositor is not null)
                 {
@@ -158,7 +157,6 @@ namespace PhotoViewer
         {
             m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
         }
-
         private void Window_Closed(object sender, WindowEventArgs args)
         {
             // Make sure any Mica/Acrylic controller is disposed so it doesn't try to

@@ -15,12 +15,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="CustomTitleBar" Height="30" Margin="-1,0" >
+        <Border x:Name="CustomTitleBar" Height="30" Margin="-1,0" >
             <TextBlock VerticalAlignment="Center" 
                        Style="{StaticResource CaptionTextBlockStyle}"
                        Margin="20,0"
-                       Text="{x:Bind Title, Mode=OneWay}"/>
-        </Grid>
+                       Text="{x:Bind Title}"/>
+        </Border>
         
         <CommandBar Background="Transparent" 
                     IsOpen="False" 
@@ -38,6 +38,8 @@
             <ScrollViewer.Resources>
                 
                 <UniformGridLayout x:Key="RepeaterLayout" 
+                                   MinColumnSpacing="20" 
+                                   MinRowSpacing="20"
                                    ItemsJustification="SpaceEvenly"/>
 
                 <DataTemplate x:Key="ImageInfoTemplate"
@@ -63,8 +65,7 @@
                            ItemsSource="{x:Bind ImagesRepository.Images}"
                            ItemTemplate="{StaticResource ImageInfoTemplate}"
                            Layout="{StaticResource RepeaterLayout}"
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"/>
+                           />
         </ScrollViewer>
 
         <InfoBar x:Name="ImageCollectionInfoBar"

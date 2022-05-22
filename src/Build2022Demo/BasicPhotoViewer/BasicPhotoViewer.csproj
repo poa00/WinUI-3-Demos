@@ -10,7 +10,9 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-	<WindowsPackageType>MSIX</WindowsPackageType> <!-- None,MSIX, Sparse -->
+	<!-- WindowsPackageType defines whether your app is packaged (MSIX) 
+	     or unpackaged (None) -->  
+	<WindowsPackageType>MSIX</WindowsPackageType> 
   </PropertyGroup>
 
   <ItemGroup>
