@@ -11,9 +11,6 @@ using namespace Microsoft::UI::Xaml::Navigation;
 using namespace ContosoAirlinePOSCpp;
 using namespace ContosoAirlinePOSCpp::implementation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
 /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -35,12 +32,12 @@ App::App()
 }
 
 /// <summary>
-/// Invoked when the application is launched normally by the end user.  Other entry points
-/// will be used such as when the application is launched to open a specific file.
+/// Invoked when the application is launched normally by the end user.
 /// </summary>
 /// <param name="e">Details about the launch request and process.</param>
 void App::OnLaunched(LaunchActivatedEventArgs const&)
 {
+    //MainWindow is a WinRT object, so you should use make to instantiate it and call the public API:
     window = make<MainWindow>();
     window.Activate();    
 }

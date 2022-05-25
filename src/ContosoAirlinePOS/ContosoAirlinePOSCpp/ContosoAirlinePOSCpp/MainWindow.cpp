@@ -10,17 +10,16 @@ using namespace Microsoft::UI::Xaml::Controls;
 using namespace Microsoft::UI::Xaml::Navigation;
 using namespace winrt::ContosoAirlinePOSCpp::implementation;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace winrt::ContosoAirlinePOSCpp::implementation
 {
     MainWindow::MainWindow()
     {
         INavigationService _navigationService;
         InitializeComponent();
-        Frame rootFrame = MainFrame();
-        _navigationService.InitializeFrame(rootFrame);
+        // The XAML markup defined the Frame and named as MainFrame (x:Name="MainFrame") 
+        // MainFrame is a property of the class MainWindow and you can get the object via MainWindow::MainFrame()
+
+        _navigationService.InitializeFrame(MainWindow::MainFrame());
         _navigationService.NavigateTo(xaml_typename<LoginPage>());
     }
 
@@ -29,7 +28,7 @@ namespace winrt::ContosoAirlinePOSCpp::implementation
         if (!MainFrame().CanGoBack()) 
         {
             INavigationService _navigationService;
-            _navigationService.InitializeFrame(MainFrame());
+            _navigationService.InitializeFrame(MainWindow::MainFrame());
         }
     }
 }
