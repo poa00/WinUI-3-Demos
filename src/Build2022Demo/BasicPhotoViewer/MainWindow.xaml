@@ -27,7 +27,6 @@
                     DefaultLabelPosition="Right"
                     Grid.Row="1">
             <AppBarButton Icon="Folder" Label="Select Folder" Click="SelectFolderClick"/>
-            <AppBarButton Icon="Edit" Label="Edit"/>
             <AppBarButton Icon="Flag" Label="About" Click="AboutClick"/>
         </CommandBar>
 
@@ -51,10 +50,9 @@
                             Padding="0"
                             PointerEntered="OnElementPointerEntered"
                             PointerExited="OnElementPointerExited">
-                        <Image Source="{x:Bind FullName}"
+                        <Image Source="{x:Bind Path}"
                                MaxWidth="360"
                                MaxHeight="360"
-                               Stretch="Uniform"
                                ToolTipService.ToolTip="{x:Bind Name}"/>
                     </Button>
                 </DataTemplate>
@@ -64,14 +62,11 @@
             <ItemsRepeater x:Name="ImagesRepeater"
                            ItemsSource="{x:Bind ImagesRepository.Images}"
                            ItemTemplate="{StaticResource ImageInfoTemplate}"
-                           Layout="{StaticResource RepeaterLayout}"
-                           />
+                           Layout="{StaticResource RepeaterLayout}"/>
         </ScrollViewer>
 
         <InfoBar x:Name="ImageCollectionInfoBar"
-                 IsOpen="False"
-                 VerticalAlignment="Bottom"
-                 Severity="Informational"
+                 Title="Info"
                  Grid.Row="3"/>
     </Grid>
 </Window>

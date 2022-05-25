@@ -7,11 +7,11 @@ namespace PhotoViewer
     public class ImageInfo
     {
         public string Name { get; }
-        public string FullName { get; }
-        public ImageInfo(string name, string fullName)
+        public string Path { get; }
+        public ImageInfo(string name, string path)
         {
             Name = name;
-            FullName = fullName;
+            Path = path;
         }
     }
     public class ImagesRepository

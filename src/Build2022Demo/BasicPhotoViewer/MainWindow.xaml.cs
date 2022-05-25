@@ -6,10 +6,10 @@ using Microsoft.UI.Xaml.Media.Imaging;
 
 using System;
 using System.Numerics;
+using System.IO;
 
 using Windows.Storage.Pickers;
 
-//Mica
 using WinRT; 
 
 namespace PhotoViewer
@@ -28,8 +28,11 @@ namespace PhotoViewer
             TrySetMicaBackdrop();
             this.Title = "Simple Photo Viewer";
 
-            string folderPath = "C:\\Users\\migue\\source\\repos\\WinUI-3-Demos\\src\\Build2022Demo\\Photos";
-            
+            // The csproj will copy the photos on the first run in the Photos folder
+            // that is on the executable folder. You can get the executable folder 
+            // from the Assembly's CurrentDomain
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Photos");
+
             LoadImages(folderPath);
         }
         private async void SelectFolderClick(object sender, RoutedEventArgs e)
@@ -51,7 +54,6 @@ namespace PhotoViewer
         {
             ImagesRepository.GetImages(folder);
             ImageCollectionInfoBar.IsOpen = true;
-            ImageCollectionInfoBar.Title = "Images Info";
             ImageCollectionInfoBar.Message = $"{ImagesRepository.Images.Count} images loaded.";
         }
 
@@ -62,15 +64,15 @@ namespace PhotoViewer
             if (imageInfo is not null)
             {
                 Image img = new();
-                img.Source = new BitmapImage(new Uri(imageInfo.FullName, UriKind.Absolute));
+                img.Source = new BitmapImage(new Uri(imageInfo.Path, UriKind.Absolute));
                 window.Content = img;
                 window.Title = imageInfo.Name;
             }
 
             var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-            var winID = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
-            var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(winID);
-
+            var windowsID = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
+            var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowsID);
+            
             appWindow.Resize(new Windows.Graphics.SizeInt32(800, 600));
 
             window.Activate();
@@ -88,32 +90,32 @@ namespace PhotoViewer
         }
         #region Animations
         //Copied from the WinUI 3 Gallery
-        private SpringVector3NaturalMotionAnimation _springAnimation;
+        private SpringVector3NaturalMotionAnimation m_springAnimation;
 
         private void OnElementPointerEntered(object sender, PointerRoutedEventArgs e)
         {
             CreateOrUpdateSpringAnimation(1.05f);
-            (sender as UIElement)?.StartAnimation(_springAnimation);
+            (sender as UIElement)?.StartAnimation(m_springAnimation);
         }
         private void OnElementPointerExited(object sender, PointerRoutedEventArgs e)
         {
             CreateOrUpdateSpringAnimation(1.0f);
-            (sender as UIElement)?.StartAnimation(_springAnimation);
+            (sender as UIElement)?.StartAnimation(m_springAnimation);
         }
         private void CreateOrUpdateSpringAnimation(float finalValue)
         {
-            if (_springAnimation is null)
+            if (m_springAnimation is null)
             {
                 // In WinUI3, the Compositor is exposed by the Window object.
                 // Make sure "this" references to the Window
                 Compositor compositor = this.Compositor;
                 if (compositor is not null)
                 {
-                    _springAnimation = compositor.CreateSpringVector3Animation();
-                    _springAnimation.Target = "Scale";
+                    m_springAnimation = compositor.CreateSpringVector3Animation();
+                    m_springAnimation.Target = "Scale";
                 }
             }
-            _springAnimation.FinalValue = new Vector3(finalValue);
+            m_springAnimation.FinalValue = new Vector3(finalValue);
         }
         #endregion Animations
 
