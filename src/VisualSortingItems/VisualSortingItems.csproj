@@ -19,8 +19,8 @@
 		     When selecting the labeled "Unpackaged" project from the launch debugging experience, 
 			 this property should be None. -->
 		
-		<!--<WindowsPackageType>None</WindowsPackageType>-->
-		<WindowsPackageType>MSIX</WindowsPackageType>
+		<WindowsPackageType>None</WindowsPackageType>
+		<!--<WindowsPackageType>MSIX</WindowsPackageType>-->
 	</PropertyGroup>
 
 
