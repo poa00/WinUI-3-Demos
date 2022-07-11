@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "VisualSortingItems (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "VisualSortingItems (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
