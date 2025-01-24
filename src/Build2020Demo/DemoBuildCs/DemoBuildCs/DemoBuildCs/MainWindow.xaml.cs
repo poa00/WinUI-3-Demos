@@ -22,6 +22,10 @@ namespace DemoBuildCs
         public MainWindow()
         {
             this.InitializeComponent();
+
+            this.ExtendsContentIntoTitleBar = true;
+            this.SetTitleBar(CustomTitleBar);
+
             splitView.PaneOpened += OnPaneOpened;
             m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
         }

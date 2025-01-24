@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "DemoBuildCs": {
+      "commandName": "Project"
+    }
+  }
+}

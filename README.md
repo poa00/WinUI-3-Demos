@@ -24,7 +24,7 @@ Taxonomies for products and languages: https://review.docs.microsoft.com/new-hop
 ## Prerequisites
 
 
-Configure your development environment following up the instructions at [Windows UI Library 3 Preview 3 (November 2020)](https://docs.microsoft.com/en-us/windows/apps/winui/winui3/)
+Configure your development environment following up the instructions at [Windows App SDK v1.0](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/set-up-your-development-environment?tabs=vs-2022)
 
 ## Contributing
 
